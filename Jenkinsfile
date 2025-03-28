@@ -19,6 +19,9 @@ pipeline {
                     if not exist venv (
                         C:\\Users\\USER\\AppData\\Local\\Programs\\Python\\Python312\\python -m venv venv
                     )
+                    call venv\\Scripts\\activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt
                     '''
                 }
             }
@@ -30,7 +33,7 @@ pipeline {
                     bat '''
                     call venv\\Scripts\\activate
                     set PYTHONIOENCODING=utf-8
-                    C:\\Users\\USER\\AppData\\Local\\Programs\\Python\\Python312\\python test_todolist.py
+                    python test_todolist.py
                     '''
                 }
             }
