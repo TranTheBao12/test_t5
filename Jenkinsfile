@@ -19,20 +19,7 @@ pipeline {
                     if not exist venv (
                         C:\\Users\\USER\\AppData\\Local\\Programs\\Python\\Python312\\python -m venv venv
                     )
-                    venv\\Scripts\\python -m pip install --upgrade pip
-                    venv\\Scripts\\python -m pip install -r requirements.txt
                     '''
-                }
-            }
-        }
-
-        stage('Start Flask Server') {
-            steps {
-                script {
-                    bat """
-        venv\\Scripts\\python app.py > flask_output.log 2>&1 &
-        ping -n 6 127.0.0.1 > nul
-        """
                 }
             }
         }
@@ -41,7 +28,9 @@ pipeline {
             steps {
                 script {
                     bat '''
-                    venv\\Scripts\\python test_todolist.py
+                    call venv\\Scripts\\activate
+                    set PYTHONIOENCODING=utf-8
+                    C:\\Users\\USER\\AppData\\Local\\Programs\\Python\\Python312\\python test_todolist.py
                     '''
                 }
             }
