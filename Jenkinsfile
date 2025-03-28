@@ -29,10 +29,10 @@ pipeline {
         stage('Start Flask Server') {
             steps {
                 script {
-                    bat '''
-                    start /B venv\\Scripts\\python app.py
-                    timeout /T 5
-                    '''
+                    bat """
+        venv\\Scripts\\python app.py > flask_output.log 2>&1 &
+        ping -n 6 127.0.0.1 > nul
+        """
                 }
             }
         }
