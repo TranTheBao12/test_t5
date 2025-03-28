@@ -19,9 +19,8 @@ pipeline {
                     if not exist venv (
                         C:\\Users\\USER\\AppData\\Local\\Programs\\Python\\Python312\\python -m venv venv
                     )
-                    call venv\\Scripts\\activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
+                    venv\\Scripts\\python -m pip install --upgrade pip
+                    venv\\Scripts\\python -m pip install -r requirements.txt
                     '''
                 }
             }
@@ -31,8 +30,7 @@ pipeline {
             steps {
                 script {
                     bat '''
-                    call venv\\Scripts\\activate
-                    start /B python app.py
+                    start /B venv\\Scripts\\python app.py
                     timeout /T 5
                     '''
                 }
@@ -43,9 +41,7 @@ pipeline {
             steps {
                 script {
                     bat '''
-                    call venv\\Scripts\\activate
-                    set PYTHONIOENCODING=utf-8
-                    python test_todolist.py
+                    venv\\Scripts\\python test_todolist.py
                     '''
                 }
             }
